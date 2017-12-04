@@ -141,7 +141,28 @@ def xgboost_run(X_train, X_test, y_train, y_test):
     print("Best Mean Logloss: {:.2f} with {} rounds".format(
                  model.best_score,
                  model.best_iteration+1))
-    model.save_model("xgboost_model3.model")
+    model.save_model("xgboost_model5.model")
+    return model
+
+
+def write_submission(preds, output):
+    sample = pd.read_csv('sampleSubmission.csv')
+    preds = pd.DataFrame(
+        preds, index=sample.id.values, columns=sample.columns[1:])
+    preds.to_csv(output, index_label='id')
+
+def load_test():
+    test = pd.read_csv('test.csv')
+    test = test.drop('id', axis=1)
+    return test.values
+
 X, y = load_train_data()
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
-xgboost_run(X_train, X_test, y_train, y_test)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=3253)
+model = xgboost_run(X_train, X_test, y_train, y_test)
+# model = xgb.Booster(model_file='xgboost_model4.model')
+X_FinalTest = load_test()
+X_FinalTest = xgb.DMatrix(X_FinalTest)
+Y_FinalTest = model.predict(X_FinalTest)
+write_submission(Y_FinalTest, 'submission4.csv')
+
+
