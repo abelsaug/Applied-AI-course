@@ -1,0 +1,19 @@
+def coin_change(coins, k , n):
+  array = [float("inf")]*(n+1)
+  array[0] = 0
+
+  for i in range(1,n+1):
+    for j in range(k):
+      if i>=coins[j]:
+        x = array[i-coins[j]]
+        if x!= (float("inf")) and (x+1<array[i]):
+          array[i]=x+1
+  total_change = array[n]
+  return total_change
+
+
+coins=[6,5,13,4,2,3]
+n = 25
+k = len(coins)
+total = coin_change(coins,k,n)
+print "Total = ", total
