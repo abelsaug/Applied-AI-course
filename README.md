@@ -1,2 +1,2 @@
-# Applied-AI-course
-Projects for Applied AI course
+# UIC-Courses
+Projects and code from UIC Graduate CS Courses
