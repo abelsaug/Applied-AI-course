@@ -47,7 +47,7 @@ def xgboost_run(X_train, X_test, y_train, y_test):
     # 'gamma':0.03,
     # 'subsample': 0.85,
     # 'colsample_bytree': 0.8,
-    # 'nthread': -1,
+    # 'nthread': 8,
     # 'num_class': 9,
     # # Other parameters
     # 'objective':'multi:softprob',
@@ -64,7 +64,7 @@ def xgboost_run(X_train, X_test, y_train, y_test):
     'gamma':0.03,
     'subsample': 0.85,
     'colsample_bytree': 0.8,
-    'nthread': -1,
+    'nthread': 8,
     'num_class': 9,
     # Other parameters
     'objective':'multi:softprob',
@@ -157,7 +157,7 @@ def load_test():
     return test.values
 
 X, y = load_train_data()
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=3253)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=3253) #1234, 2612, 625
 model = xgboost_run(X_train, X_test, y_train, y_test)
 # model = xgb.Booster(model_file='xgboost_model4.model')
 X_FinalTest = load_test()
