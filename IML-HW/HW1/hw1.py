@@ -8,10 +8,19 @@ def prime_nums_reversed(n):
             '5 3 2 1'
         Note: The ellipsis (...) indicates something you should fill in. It doesn't necessarily imply you should replace it with only one line of code.
     '''
-
-    # PUT YOUR CODE HERE
-    pass    # remove the 'pass'
-
+    def isPrime(string1,N):
+        notPrime = 0
+        for i in range(2,N):
+            if N%i == 0:
+                notPrime = 1
+        if notPrime == 0:
+            return string1 + str(N) + " "
+        return string1
+    string1 = ""
+    while(n>1):
+        string1 = isPrime(string1,n)
+        n = n-1
+    return string1
 
 # Question 1(b)
 def string_explosion(string):
@@ -27,8 +36,12 @@ def string_explosion(string):
         Hint: Try to use recursion.
     '''
 
-    # PUT YOUR CODE HERE
-    pass    # remove the 'pass'
+    if not string:
+        return ""
+    str = string
+    string = string[1:]
+    return str + string_explosion(string)
+
 
 
 # Question 1(c)
@@ -42,8 +55,12 @@ def consecutive(nums):
         True
     '''
 
-    # PUT YOUR CODE HERE
-    pass    # remove the 'pass'
+    i=0
+    for element in nums[:-1]:
+        i+=1
+        if element == nums[i]-1 or element == nums[i]+1:
+            return True
+    return False
 
 
 # Question 2(a)
@@ -65,13 +82,10 @@ def bowl_cost(v):
         The first entry of the result should be the cost of fruit bowl #1, the second entry the cost of fruit bowl #2, etc.
     '''
 
-    B = np.array([
-        # You should fill this in.
-    ])
+    B = np.array([[3,3,3],[2,0,8],[0,5,3],[0,0,10]])
 
     # The notation B @ v means: compute the matrix multiplication Bv
     return B @ v
-
 
 # Question 2(b)
 def amount_spent(v, B):
@@ -91,8 +105,8 @@ def amount_spent(v, B):
     '''
 
     A = np.array([
-        [2, 0, 1, 0]
-    ]) # Finish this!
+        [2, 0, 1, 0],[1,1,1,1],[0,0,0,10]
+    ])
 
     return A @ B @ v
 
@@ -108,6 +122,5 @@ def new_price(A, B, x):
 
         Use np.linalg.inv and x to compute the new prices for the individual fruits:
     '''
-
-    new_v = None    # Fill your code here
+    new_v = np.linalg.inv(A @ B) @ x
     return new_v
