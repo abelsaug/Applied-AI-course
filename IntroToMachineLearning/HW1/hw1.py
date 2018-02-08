@@ -21,7 +21,6 @@ def prime_nums_reversed(n):
         string1 = isPrime(string1,n)
         n = n-1
     return string1
-
 # Question 1(b)
 def string_explosion(string):
     '''
