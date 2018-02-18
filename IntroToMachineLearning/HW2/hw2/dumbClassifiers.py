@@ -57,13 +57,10 @@ class AlwaysPredictMostFrequent(BinaryClassifier):
         X is an vector and we want to make a single prediction: Just
         return the most frequent class!
         """
-        ### TODO: YOUR CODE HERE
-        util.raiseNotDefined()
+        return self.mostFrequentClass
 
     def train(self, X, Y):
         '''
         just figure out what the most frequent class is and store it in self.mostFrequentClass
         '''
-
-        ### TODO: YOUR CODE HERE
-        util.raiseNotDefined()
+        self.mostFrequentClass = util.mode(Y)

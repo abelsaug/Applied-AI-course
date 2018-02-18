@@ -146,7 +146,7 @@ if __name__ == '__main__':
         else:
             C.append(MSCandidateGen(F[k-1],sdc, sup_count, mis))
         for c in C[k]:
-            if len(c) >= mis[c[1]]:
+            if ccount/N >= mis[c[1]]: #Update this
                 Fk.append(C[k])
         F.append(Fk)
         k+=1
