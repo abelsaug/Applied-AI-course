@@ -64,8 +64,13 @@ class DT(BinaryClassifier):
         branch.
         """
 
-        ### TODO: YOUR CODE HERE
-        util.raiseNotDefined()
+        if self.isLeaf:
+            return self.label
+        else:
+            if X[self.feature]<0.5:
+                return self.left.predict(X)
+            else:
+                return self.right.predict(X)
 
     def trainDT(self, X, Y, maxDepth, used):
         """
@@ -80,9 +85,9 @@ class DT(BinaryClassifier):
         if maxDepth <= 0 or len(util.uniq(Y)) <= 1:
             # we'd better end at this point.  need to figure
             # out the label to return
-            self.isLeaf = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+            self.isLeaf = True
 
-            self.label  = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+            self.label  = util.mode(Y)
 
 
         else:
@@ -93,20 +98,26 @@ class DT(BinaryClassifier):
                 # have we used this feature yet
                 if d in used:
                     continue
-
                 # suppose we split on this feature; what labels
                 # would go left and right?
-                leftY  = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+                leftY  = Y[X[:,d]<0.5]
 
-                rightY = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
-
+                rightY = Y[X[:,d]>=0.5]
 
                 # we'll classify the left points as their most
                 # common class and ditto right points.  our error
                 # is the how many are not their mode.
-                error = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
-
-
+                countL = 0
+                countR = 0
+                leftYMode = util.mode(leftY)
+                rightYMode = util.mode(rightY)
+                for Lelements in leftY:
+                    if leftYMode != Lelements:
+                        countL+=1
+                for Relements in rightY:
+                    if rightYMode != Relements:
+                        countR+=1
+                error = countL + countR
                 # check to see if this is a better error rate
                 if error <= bestError:
                     bestFeature = d
@@ -118,20 +129,26 @@ class DT(BinaryClassifier):
                 self.label  = util.mode(Y)
 
             else:
-                self.isLeaf  = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+                self.isLeaf  = False
 
-                self.feature = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+                self.feature = bestFeature
 
 
                 self.left  = DT({'maxDepth': maxDepth-1})
                 self.right = DT({'maxDepth': maxDepth-1})
+
+                leftX = X[X[:,bestFeature]<0.5]
+                rightX = X[X[:,bestFeature]>=0.5]
+                leftY  = Y[X[:,bestFeature]<0.5]
+
+                rightY = Y[X[:,bestFeature]>=0.5]
+                used.append(bestFeature)
                 # recurse on our children by calling
-                #   self.left.trainDT(...) 
+                self.left.trainDT(leftX, leftY,maxDepth-1,used) 
                 # and
-                #   self.right.trainDT(...) 
+                self.right.trainDT(rightX, rightY,maxDepth-1,used) 
                 # with appropriate arguments
-                ### TODO: YOUR CODE HERE
-                util.raiseNotDefined()
+
 
     def train(self, X, Y):
         """
