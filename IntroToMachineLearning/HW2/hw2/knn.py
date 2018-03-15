@@ -42,6 +42,38 @@ class KNN(BinaryClassifier):
         """
         return    "w=" + repr(self.weights)
 
+    def loadDigitData(filename, maxExamples=100000):
+        h = open(filename, 'r')
+        D = []
+        for l in h.readlines():
+            a = l.split()
+            if len(a) > 1:
+                y = float(a[0])
+                if y > 0.5: y = 1.
+                else: y = -1.
+                x = {}
+                for i in range(1, len(a)):
+                    v = float(a[i]) / 255.
+                    if v > 0.:
+                        x[i] = v
+                D.append( (x,y) )
+                if len(D) >= maxExamples:
+                    break
+        h.close()
+        return D
+
+    def exampleDistance(x1, x2):
+        dist = 0.
+        for i,v1 in x1.items():
+            v2 = 0.
+            if i in x2: v2 = x2[i]
+            dist += (v1 - v2) * (v1 - v2)
+        for i,v2 in x2.items():
+            if not i in x1:
+                dist += v2 * v2
+        return sqrt(dist)
+
+
     def predict(self, X):
         """
         X is a vector that we're supposed to make a prediction about.

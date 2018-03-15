@@ -1,0 +1,892 @@
+// ~->[DNET-1]->~
+
+// File created by GmytrasiewiczP_2 at UIC using Netica 5.22x on Oct 27, 2017 at 00:41:23 UTC.
+
+bnet CarAccidents {
+AutoCompile = TRUE;
+autoupdate = TRUE;
+whenchanged = 1509064859;
+
+visual V1 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 9;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	windowposn = (26, 26, 1238, 488);
+	resolution = 72;
+	drawingbounds = (1899, 950);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0x00e1e1e1;};
+	NodeSet Nature {BuiltIn = 1; Color = 0x00f8eed2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0x00d3caa6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0x00c8c8c8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0x00ffffff;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00ffffb4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0x00ffbdbd;};
+	NodeSet Decision {BuiltIn = 1; Color = 0x00dee8ff;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0x00f0fafa;};
+	NodeSet Title {BuiltIn = 1; Color = 0x00ffffff;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		};
+	};
+
+node A2 {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (Speed50to70kmph, Speed71to80kmph, Speed81to90kmph, Speed91to100kmph, Speed101to120kmph);
+	parents = ();
+	title = "Speeding\n";
+	whenchanged = 1509063099;
+	evidence = Speed91to100kmph;
+	likelihood = (0, 0, 0, 1, 0);
+	belief = (0, 0, 0, 1, 0);
+	visual V1 {
+		center = (156, 348);
+		height = 14;
+		};
+	};
+
+node W {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "WrongWay Driving";
+	whenchanged = 1509063134;
+	likelihood = (0.09433962, 1);
+	belief = (0.0862069, 0.9137931);
+	visual V1 {
+		center = (378, 348);
+		height = 2;
+		};
+	};
+
+node V {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "Unsafe LaneChanges\n";
+	whenchanged = 1509063131;
+	likelihood = (0.3333333, 1);
+	belief = (0.25, 0.75);
+	visual V1 {
+		center = (540, 348);
+		height = 3;
+		};
+	};
+
+node Y {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "Tailgating\n";
+	whenchanged = 1509063126;
+	likelihood = (0.2244898, 1);
+	belief = (0.1833333, 0.8166667);
+	visual V1 {
+		center = (702, 348);
+		height = 4;
+		};
+	};
+
+node X {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "Improper Turns\n";
+	whenchanged = 1509063122;
+	likelihood = (0.07692308, 1);
+	belief = (0.07142858, 0.9285714);
+	visual V1 {
+		center = (864, 348);
+		height = 5;
+		};
+	};
+
+node T {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "Running RedLights/StopSigns\n";
+	whenchanged = 1509064859;
+	likelihood = (0.03448276, 1);
+	belief = (0.03333334, 0.9666666);
+	visual V1 {
+		center = (1044, 348);
+		height = 23;
+		};
+	};
+
+node L {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Age18to25, Age25to35, Age35to45, Age45to55, Age55to70, Age70andAbove);
+	levels = (0.194444, 0.16667, 0.111111, 0.111111, 0.194444, 0.222222);
+	parents = ();
+	probs = 
+		// Age18to25    Age25to35    Age35to45    Age45to55    Age55to70    Age70andAbove 
+		  (0.1428571,   0.2857144,   0.1428571,   0.1428571,   0.1428571,   0.1428571);
+	numcases = 7;
+	ExperBase = 1;
+	title = "Age";
+	whenchanged = 1509063111;
+	evidence = Age18to25;
+	value = 0.194444;
+	likelihood = (1, 0, 0, 0, 0, 0);
+	belief = (1, 0, 0, 0, 0, 0);
+	visual V1 {
+		center = (1176, 210);
+		height = 21;
+		};
+	};
+
+node A7 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (ExpLvl0to3, ExpLvl3to5, ExpLvl5to10, ExpLvl10abdAbove);
+	parents = ();
+	probs = 
+		// ExpLvl0to3   ExpLvl3to5   ExpLvl5to10  ExpLvl10abdAbove 
+		  (0.4,         0.2,         0.2,         0.2);
+	numcases = 5;
+	title = "Years since DL issued";
+	whenchanged = 1509063108;
+	evidence = ExpLvl0to3;
+	likelihood = (1, 0, 0, 0);
+	belief = (1, 0, 0, 0);
+	visual V1 {
+		center = (936, 222);
+		height = 22;
+		};
+	};
+
+node K {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = DETERMIN;
+	states = (Low, Medium, High);
+	parents = (L, A7);
+	functable = 
+		                    // L             A7               
+		  (Low,             // Age18to25     ExpLvl0to3       
+		   Low,             // Age18to25     ExpLvl3to5       
+		   Medium,          // Age18to25     ExpLvl5to10      
+		   High,            // Age18to25     ExpLvl10abdAbove 
+		   Low,             // Age25to35     ExpLvl0to3       
+		   Medium,          // Age25to35     ExpLvl3to5       
+		   Medium,          // Age25to35     ExpLvl5to10      
+		   High,            // Age25to35     ExpLvl10abdAbove 
+		   Low,             // Age35to45     ExpLvl0to3       
+		   Medium,          // Age35to45     ExpLvl3to5       
+		   High,            // Age35to45     ExpLvl5to10      
+		   High,            // Age35to45     ExpLvl10abdAbove 
+		   Low,             // Age45to55     ExpLvl0to3       
+		   Medium,          // Age45to55     ExpLvl3to5       
+		   Medium,          // Age45to55     ExpLvl5to10      
+		   High,            // Age45to55     ExpLvl10abdAbove 
+		   Low,             // Age55to70     ExpLvl0to3       
+		   Low,             // Age55to70     ExpLvl3to5       
+		   Medium,          // Age55to70     ExpLvl5to10      
+		   High,            // Age55to70     ExpLvl10abdAbove 
+		   Low,             // Age70andAbove ExpLvl0to3       
+		   Low,             // Age70andAbove ExpLvl3to5       
+		   Medium,          // Age70andAbove ExpLvl5to10      
+		   High);           // Age70andAbove ExpLvl10abdAbove ;
+	title = "ExperienceLevel\n";
+	whenchanged = 1509060239;
+	belief = (1, 0, 0);
+	visual V1 {
+		center = (1248, 354);
+		height = 24;
+		};
+	};
+
+node A6 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (YES, NO);
+	parents = (W, V, Y, X, T, K);
+	probs = 
+		// YES          NO            // W   V   Y   X   T   K      
+		  (0.95,        0.05,         // YES YES YES YES YES Low    
+		   0.85,        0.15,         // YES YES YES YES YES Medium 
+		   0.75,        0.25,         // YES YES YES YES YES High   
+		   0.85,        0.15,         // YES YES YES YES NO  Low    
+		   0.75,        0.25,         // YES YES YES YES NO  Medium 
+		   0.65,        0.35,         // YES YES YES YES NO  High   
+		   0.9,         0.1,          // YES YES YES NO  YES Low    
+		   0.8,         0.2,          // YES YES YES NO  YES Medium 
+		   0.7,         0.3,          // YES YES YES NO  YES High   
+		   0.8,         0.2,          // YES YES YES NO  NO  Low    
+		   0.7,         0.3,          // YES YES YES NO  NO  Medium 
+		   0.6,         0.4,          // YES YES YES NO  NO  High   
+		   0.9,         0.1,          // YES YES NO  YES YES Low    
+		   0.8,         0.2,          // YES YES NO  YES YES Medium 
+		   0.7,         0.3,          // YES YES NO  YES YES High   
+		   0.8,         0.2,          // YES YES NO  YES NO  Low    
+		   0.7,         0.3,          // YES YES NO  YES NO  Medium 
+		   0.6,         0.4,          // YES YES NO  YES NO  High   
+		   0.85,        0.15,         // YES YES NO  NO  YES Low    
+		   0.75,        0.25,         // YES YES NO  NO  YES Medium 
+		   0.65,        0.35,         // YES YES NO  NO  YES High   
+		   0.75,        0.25,         // YES YES NO  NO  NO  Low    
+		   0.65,        0.35,         // YES YES NO  NO  NO  Medium 
+		   0.55,        0.45,         // YES YES NO  NO  NO  High   
+		   0.92,        0.08,         // YES NO  YES YES YES Low    
+		   0.82,        0.18,         // YES NO  YES YES YES Medium 
+		   0.72,        0.28,         // YES NO  YES YES YES High   
+		   0.82,        0.18,         // YES NO  YES YES NO  Low    
+		   0.72,        0.28,         // YES NO  YES YES NO  Medium 
+		   0.62,        0.38,         // YES NO  YES YES NO  High   
+		   0.87,        0.13,         // YES NO  YES NO  YES Low    
+		   0.77,        0.23,         // YES NO  YES NO  YES Medium 
+		   0.67,        0.33,         // YES NO  YES NO  YES High   
+		   0.7,         0.3,          // YES NO  YES NO  NO  Low    
+		   0.6,         0.4,          // YES NO  YES NO  NO  Medium 
+		   0.5,         0.5,          // YES NO  YES NO  NO  High   
+		   0.85,        0.15,         // YES NO  NO  YES YES Low    
+		   0.75,        0.25,         // YES NO  NO  YES YES Medium 
+		   0.65,        0.35,         // YES NO  NO  YES YES High   
+		   0.75,        0.25,         // YES NO  NO  YES NO  Low    
+		   0.65,        0.35,         // YES NO  NO  YES NO  Medium 
+		   0.55,        0.45,         // YES NO  NO  YES NO  High   
+		   0.75,        0.25,         // YES NO  NO  NO  YES Low    
+		   0.65,        0.35,         // YES NO  NO  NO  YES Medium 
+		   0.55,        0.45,         // YES NO  NO  NO  YES High   
+		   0.6,         0.4,          // YES NO  NO  NO  NO  Low    
+		   0.5,         0.5,          // YES NO  NO  NO  NO  Medium 
+		   0.4,         0.6,          // YES NO  NO  NO  NO  High   
+		   0.85,        0.15,         // NO  YES YES YES YES Low    
+		   0.75,        0.25,         // NO  YES YES YES YES Medium 
+		   0.65,        0.35,         // NO  YES YES YES YES High   
+		   0.65,        0.35,         // NO  YES YES YES NO  Low    
+		   0.55,        0.45,         // NO  YES YES YES NO  Medium 
+		   0.45,        0.55,         // NO  YES YES YES NO  High   
+		   0.8,         0.2,          // NO  YES YES NO  YES Low    
+		   0.7,         0.3,          // NO  YES YES NO  YES Medium 
+		   0.6,         0.4,          // NO  YES YES NO  YES High   
+		   0.75,        0.25,         // NO  YES YES NO  NO  Low    
+		   0.65,        0.35,         // NO  YES YES NO  NO  Medium 
+		   0.55,        0.45,         // NO  YES YES NO  NO  High   
+		   0.78,        0.22,         // NO  YES NO  YES YES Low    
+		   0.68,        0.32,         // NO  YES NO  YES YES Medium 
+		   0.58,        0.42,         // NO  YES NO  YES YES High   
+		   0.5,         0.5,          // NO  YES NO  YES NO  Low    
+		   0.4,         0.6,          // NO  YES NO  YES NO  Medium 
+		   0.3,         0.7,          // NO  YES NO  YES NO  High   
+		   0.7,         0.3,          // NO  YES NO  NO  YES Low    
+		   0.6,         0.4,          // NO  YES NO  NO  YES Medium 
+		   0.5,         0.5,          // NO  YES NO  NO  YES High   
+		   0.3,         0.7,          // NO  YES NO  NO  NO  Low    
+		   0.2,         0.8,          // NO  YES NO  NO  NO  Medium 
+		   0.1,         0.9,          // NO  YES NO  NO  NO  High   
+		   0.73,        0.27,         // NO  NO  YES YES YES Low    
+		   0.63,        0.37,         // NO  NO  YES YES YES Medium 
+		   0.53,        0.47,         // NO  NO  YES YES YES High   
+		   0.67,        0.33,         // NO  NO  YES YES NO  Low    
+		   0.57,        0.43,         // NO  NO  YES YES NO  Medium 
+		   0.47,        0.53,         // NO  NO  YES YES NO  High   
+		   0.73,        0.27,         // NO  NO  YES NO  YES Low    
+		   0.63,        0.37,         // NO  NO  YES NO  YES Medium 
+		   0.53,        0.47,         // NO  NO  YES NO  YES High   
+		   0.5,         0.5,          // NO  NO  YES NO  NO  Low    
+		   0.4,         0.6,          // NO  NO  YES NO  NO  Medium 
+		   0.3,         0.7,          // NO  NO  YES NO  NO  High   
+		   0.65,        0.35,         // NO  NO  NO  YES YES Low    
+		   0.55,        0.45,         // NO  NO  NO  YES YES Medium 
+		   0.45,        0.55,         // NO  NO  NO  YES YES High   
+		   0.3,         0.7,          // NO  NO  NO  YES NO  Low    
+		   0.2,         0.8,          // NO  NO  NO  YES NO  Medium 
+		   0.1,         0.9,          // NO  NO  NO  YES NO  High   
+		   0.6,         0.4,          // NO  NO  NO  NO  YES Low    
+		   0.5,         0.5,          // NO  NO  NO  NO  YES Medium 
+		   0.4,         0.6,          // NO  NO  NO  NO  YES High   
+		   0.15,        0.85,         // NO  NO  NO  NO  NO  Low    
+		   0.1,         0.9,          // NO  NO  NO  NO  NO  Medium 
+		   0.05,        0.95);        // NO  NO  NO  NO  NO  High   ;
+	numcases = 
+		                 // W   V   Y   X   T   K      
+		  (1,            // YES YES YES YES YES Low    
+		   1,            // YES YES YES YES YES Medium 
+		   1,            // YES YES YES YES YES High   
+		   1,            // YES YES YES YES NO  Low    
+		   1,            // YES YES YES YES NO  Medium 
+		   1,            // YES YES YES YES NO  High   
+		   1,            // YES YES YES NO  YES Low    
+		   1,            // YES YES YES NO  YES Medium 
+		   1,            // YES YES YES NO  YES High   
+		   1,            // YES YES YES NO  NO  Low    
+		   1,            // YES YES YES NO  NO  Medium 
+		   1,            // YES YES YES NO  NO  High   
+		   1,            // YES YES NO  YES YES Low    
+		   1,            // YES YES NO  YES YES Medium 
+		   1,            // YES YES NO  YES YES High   
+		   1,            // YES YES NO  YES NO  Low    
+		   1,            // YES YES NO  YES NO  Medium 
+		   1,            // YES YES NO  YES NO  High   
+		   1,            // YES YES NO  NO  YES Low    
+		   1,            // YES YES NO  NO  YES Medium 
+		   1,            // YES YES NO  NO  YES High   
+		   1,            // YES YES NO  NO  NO  Low    
+		   0,            // YES YES NO  NO  NO  Medium 
+		   0,            // YES YES NO  NO  NO  High   
+		   0,            // YES NO  YES YES YES Low    
+		   0,            // YES NO  YES YES YES Medium 
+		   0,            // YES NO  YES YES YES High   
+		   0,            // YES NO  YES YES NO  Low    
+		   0,            // YES NO  YES YES NO  Medium 
+		   0,            // YES NO  YES YES NO  High   
+		   0,            // YES NO  YES NO  YES Low    
+		   0,            // YES NO  YES NO  YES Medium 
+		   0,            // YES NO  YES NO  YES High   
+		   0,            // YES NO  YES NO  NO  Low    
+		   0,            // YES NO  YES NO  NO  Medium 
+		   0,            // YES NO  YES NO  NO  High   
+		   0,            // YES NO  NO  YES YES Low    
+		   0,            // YES NO  NO  YES YES Medium 
+		   0,            // YES NO  NO  YES YES High   
+		   0,            // YES NO  NO  YES NO  Low    
+		   0,            // YES NO  NO  YES NO  Medium 
+		   0,            // YES NO  NO  YES NO  High   
+		   0,            // YES NO  NO  NO  YES Low    
+		   0,            // YES NO  NO  NO  YES Medium 
+		   0,            // YES NO  NO  NO  YES High   
+		   0,            // YES NO  NO  NO  NO  Low    
+		   0,            // YES NO  NO  NO  NO  Medium 
+		   0,            // YES NO  NO  NO  NO  High   
+		   0,            // NO  YES YES YES YES Low    
+		   0,            // NO  YES YES YES YES Medium 
+		   0,            // NO  YES YES YES YES High   
+		   0,            // NO  YES YES YES NO  Low    
+		   0,            // NO  YES YES YES NO  Medium 
+		   0,            // NO  YES YES YES NO  High   
+		   0,            // NO  YES YES NO  YES Low    
+		   0,            // NO  YES YES NO  YES Medium 
+		   0,            // NO  YES YES NO  YES High   
+		   0,            // NO  YES YES NO  NO  Low    
+		   0,            // NO  YES YES NO  NO  Medium 
+		   0,            // NO  YES YES NO  NO  High   
+		   0,            // NO  YES NO  YES YES Low    
+		   0,            // NO  YES NO  YES YES Medium 
+		   0,            // NO  YES NO  YES YES High   
+		   0,            // NO  YES NO  YES NO  Low    
+		   0,            // NO  YES NO  YES NO  Medium 
+		   0,            // NO  YES NO  YES NO  High   
+		   0,            // NO  YES NO  NO  YES Low    
+		   0,            // NO  YES NO  NO  YES Medium 
+		   0,            // NO  YES NO  NO  YES High   
+		   0,            // NO  YES NO  NO  NO  Low    
+		   0,            // NO  YES NO  NO  NO  Medium 
+		   0,            // NO  YES NO  NO  NO  High   
+		   0,            // NO  NO  YES YES YES Low    
+		   0,            // NO  NO  YES YES YES Medium 
+		   0,            // NO  NO  YES YES YES High   
+		   0,            // NO  NO  YES YES NO  Low    
+		   0,            // NO  NO  YES YES NO  Medium 
+		   0,            // NO  NO  YES YES NO  High   
+		   0,            // NO  NO  YES NO  YES Low    
+		   0,            // NO  NO  YES NO  YES Medium 
+		   0,            // NO  NO  YES NO  YES High   
+		   0,            // NO  NO  YES NO  NO  Low    
+		   0,            // NO  NO  YES NO  NO  Medium 
+		   0,            // NO  NO  YES NO  NO  High   
+		   0,            // NO  NO  NO  YES YES Low    
+		   0,            // NO  NO  NO  YES YES Medium 
+		   0,            // NO  NO  NO  YES YES High   
+		   0,            // NO  NO  NO  YES NO  Low    
+		   0,            // NO  NO  NO  YES NO  Medium 
+		   0,            // NO  NO  NO  YES NO  High   
+		   0,            // NO  NO  NO  NO  YES Low    
+		   0,            // NO  NO  NO  NO  YES Medium 
+		   0,            // NO  NO  NO  NO  YES High   
+		   0,            // NO  NO  NO  NO  NO  Low    
+		   0,            // NO  NO  NO  NO  NO  Medium 
+		   0);           // NO  NO  NO  NO  NO  High   ;
+	title = "DistractedDriving\n";
+	whenchanged = 1509062640;
+	belief = (0.3132206, 0.6867794);
+	visual V1 {
+		center = (816, 450);
+		height = 8;
+		link 2 {
+			path = ((610, 375), (746, 425));
+			};
+		};
+	};
+
+node J {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (YES, NO);
+	parents = (K);
+	probs = 
+		// YES          NO            // K      
+		  (0.15,        0.85,         // Low    
+		   0.1,         0.9,          // Medium 
+		   0.05,        0.95);        // High   ;
+	numcases = 1;
+	title = "RoadRage\n";
+	whenchanged = 1509007261;
+	belief = (0.15, 0.85);
+	visual V1 {
+		center = (1014, 450);
+		height = 13;
+		};
+	};
+
+node M {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (YES, NO);
+	parents = (W, V, Y);
+	probs = 
+		// YES          NO            // W   V   Y   
+		  (0.7,         0.3,          // YES YES YES 
+		   0.6,         0.4,          // YES YES NO  
+		   0.55,        0.45,         // YES NO  YES 
+		   0.3,         0.7,          // YES NO  NO  
+		   0.35,        0.65,         // NO  YES YES 
+		   0.15,        0.85,         // NO  YES NO  
+		   0.08,        0.92,         // NO  NO  YES 
+		   0.03,        0.97);        // NO  NO  NO  ;
+	numcases = 1;
+	title = "CulturalMisunderstanding";
+	whenchanged = 1509007403;
+	belief = (0.1051724, 0.8948276);
+	visual V1 {
+		center = (600, 450);
+		height = 6;
+		link 1 {
+			path = ((434, 375), (543, 424));
+			};
+		};
+	};
+
+node R {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (YES, NO);
+	parents = (A6, J, M, A2);
+	probs = 
+		// YES          NO            // A6  J   M   A2               
+		  (0.72,        0.28,         // YES YES YES Speed50to70kmph  
+		   0.78,        0.22,         // YES YES YES Speed71to80kmph  
+		   0.85,        0.15,         // YES YES YES Speed81to90kmph  
+		   0.88,        0.12,         // YES YES YES Speed91to100kmph 
+		   0.93,        0.07,         // YES YES YES Speed101to120kmp 
+		   0.6,         0.4,          // YES YES NO  Speed50to70kmph  
+		   0.68,        0.32,         // YES YES NO  Speed71to80kmph  
+		   0.74,        0.26,         // YES YES NO  Speed81to90kmph  
+		   0.79,        0.21,         // YES YES NO  Speed91to100kmph 
+		   0.85,        0.15,         // YES YES NO  Speed101to120kmp 
+		   0.63,        0.37,         // YES NO  YES Speed50to70kmph  
+		   0.68,        0.32,         // YES NO  YES Speed71to80kmph  
+		   0.75,        0.25,         // YES NO  YES Speed81to90kmph  
+		   0.8,         0.2,          // YES NO  YES Speed91to100kmph 
+		   0.85,        0.15,         // YES NO  YES Speed101to120kmp 
+		   0.31,        0.69,         // YES NO  NO  Speed50to70kmph  
+		   0.45,        0.55,         // YES NO  NO  Speed71to80kmph  
+		   0.53,        0.47,         // YES NO  NO  Speed81to90kmph  
+		   0.59,        0.41,         // YES NO  NO  Speed91to100kmph 
+		   0.67,        0.33,         // YES NO  NO  Speed101to120kmp 
+		   0.6,         0.4,          // NO  YES YES Speed50to70kmph  
+		   0.7,         0.3,          // NO  YES YES Speed71to80kmph  
+		   0.76,        0.24,         // NO  YES YES Speed81to90kmph  
+		   0.83,        0.17,         // NO  YES YES Speed91to100kmph 
+		   0.9,         0.1,          // NO  YES YES Speed101to120kmp 
+		   0.25,        0.75,         // NO  YES NO  Speed50to70kmph  
+		   0.35,        0.65,         // NO  YES NO  Speed71to80kmph  
+		   0.42,        0.58,         // NO  YES NO  Speed81to90kmph  
+		   0.51,        0.49,         // NO  YES NO  Speed91to100kmph 
+		   0.63,        0.37,         // NO  YES NO  Speed101to120kmp 
+		   0.18,        0.82,         // NO  NO  YES Speed50to70kmph  
+		   0.28,        0.72,         // NO  NO  YES Speed71to80kmph  
+		   0.35,        0.65,         // NO  NO  YES Speed81to90kmph  
+		   0.45,        0.55,         // NO  NO  YES Speed91to100kmph 
+		   0.6,         0.4,          // NO  NO  YES Speed101to120kmp 
+		   0,           1,            // NO  NO  NO  Speed50to70kmph  
+		   0,           1,            // NO  NO  NO  Speed71to80kmph  
+		   0,           1,            // NO  NO  NO  Speed81to90kmph  
+		   0,           1,            // NO  NO  NO  Speed91to100kmph 
+		   0.02,        0.98);        // NO  NO  NO  Speed101to120kmp ;
+	numcases = 
+		                 // A6  J   M   A2               
+		  (1,            // YES YES YES Speed50to70kmph  
+		   1,            // YES YES YES Speed71to80kmph  
+		   1,            // YES YES YES Speed81to90kmph  
+		   1,            // YES YES YES Speed91to100kmph 
+		   1,            // YES YES YES Speed101to120kmp 
+		   0,            // YES YES NO  Speed50to70kmph  
+		   0,            // YES YES NO  Speed71to80kmph  
+		   0,            // YES YES NO  Speed81to90kmph  
+		   0,            // YES YES NO  Speed91to100kmph 
+		   0,            // YES YES NO  Speed101to120kmp 
+		   0,            // YES NO  YES Speed50to70kmph  
+		   0,            // YES NO  YES Speed71to80kmph  
+		   0,            // YES NO  YES Speed81to90kmph  
+		   0,            // YES NO  YES Speed91to100kmph 
+		   0,            // YES NO  YES Speed101to120kmp 
+		   0,            // YES NO  NO  Speed50to70kmph  
+		   0,            // YES NO  NO  Speed71to80kmph  
+		   0,            // YES NO  NO  Speed81to90kmph  
+		   0,            // YES NO  NO  Speed91to100kmph 
+		   0,            // YES NO  NO  Speed101to120kmp 
+		   0,            // NO  YES YES Speed50to70kmph  
+		   0,            // NO  YES YES Speed71to80kmph  
+		   0,            // NO  YES YES Speed81to90kmph  
+		   0,            // NO  YES YES Speed91to100kmph 
+		   0,            // NO  YES YES Speed101to120kmp 
+		   0,            // NO  YES NO  Speed50to70kmph  
+		   0,            // NO  YES NO  Speed71to80kmph  
+		   0,            // NO  YES NO  Speed81to90kmph  
+		   0,            // NO  YES NO  Speed91to100kmph 
+		   0,            // NO  YES NO  Speed101to120kmp 
+		   0,            // NO  NO  YES Speed50to70kmph  
+		   0,            // NO  NO  YES Speed71to80kmph  
+		   0,            // NO  NO  YES Speed81to90kmph  
+		   0,            // NO  NO  YES Speed91to100kmph 
+		   0,            // NO  NO  YES Speed101to120kmp 
+		   0,            // NO  NO  NO  Speed50to70kmph  
+		   0,            // NO  NO  NO  Speed71to80kmph  
+		   0,            // NO  NO  NO  Speed81to90kmph  
+		   0,            // NO  NO  NO  Speed91to100kmph 
+		   0);           // NO  NO  NO  Speed101to120kmp ;
+	title = "Reckless Driving\n";
+	whenchanged = 1509060122;
+	belief = (0.2794006, 0.7205994);
+	visual V1 {
+		center = (816, 552);
+		height = 12;
+		};
+	};
+
+node U {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "NightDriving";
+	whenchanged = 1509063194;
+	likelihood = (0.7419355, 1);
+	belief = (0.4259259, 0.574074);
+	visual V1 {
+		center = (414, 552);
+		height = 7;
+		};
+	};
+
+node S {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "Bad Weather";
+	whenchanged = 1509063172;
+	likelihood = (0.4210526, 0.501845);
+	belief = (0.4562289, 0.543771);
+	visual V1 {
+		center = (612, 552);
+		height = 9;
+		};
+	};
+
+node Z {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "BadRoads";
+	whenchanged = 1509063230;
+	likelihood = (0.1481481, 1);
+	belief = (0.1290322, 0.8709677);
+	visual V1 {
+		center = (1014, 552);
+		height = 10;
+		};
+	};
+
+node A1 {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "Car Defects";
+	whenchanged = 1509063236;
+	likelihood = (0.2156863, 1);
+	belief = (0.1774194, 0.8225806);
+	visual V1 {
+		center = (1224, 552);
+		height = 11;
+		};
+	};
+
+node G {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "DUI Drinking";
+	whenchanged = 1509062746;
+	likelihood = (0.125, 0.7464789);
+	belief = (0.1434343, 0.8565657);
+	visual V1 {
+		center = (1314, 96);
+		height = 15;
+		};
+	};
+
+node H {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "DUI Drugs";
+	whenchanged = 1509063105;
+	likelihood = (0.01639344, 1);
+	belief = (0.01612903, 0.983871);
+	visual V1 {
+		center = (1524, 96);
+		height = 16;
+		};
+	};
+
+node A3 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (YES, NO);
+	parents = (G, H);
+	probs = 
+		// YES          NO            // G   H   
+		  (0.83,        0.17,         // YES YES 
+		   0.72,        0.28,         // YES NO  
+		   0.7,         0.3,          // NO  YES 
+		   0.04,        0.96);        // NO  NO  ;
+	numcases = 1;
+	title = "Intoxication";
+	whenchanged = 1509006988;
+	belief = (0.1469081, 0.8530919);
+	visual V1 {
+		center = (1422, 252);
+		height = 17;
+		};
+	};
+
+node N {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "Drowsiness\n";
+	whenchanged = 1509063209;
+	likelihood = (0.2340426, 1);
+	belief = (0.1896552, 0.8103448);
+	visual V1 {
+		center = (1614, 252);
+		height = 18;
+		};
+	};
+
+node A4 {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (YES, NO);
+	parents = ();
+	title = "Medical Condition";
+	whenchanged = 1509063215;
+	likelihood = (0.07407408, 1);
+	belief = (0.06896552, 0.9310345);
+	visual V1 {
+		center = (1806, 252);
+		height = 19;
+		};
+	};
+
+node A5 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (YES, NO);
+	parents = (A3, N, A4);
+	probs = 
+		// YES          NO            // A3  N   A4  
+		  (0.4,         0.6,          // YES YES YES 
+		   0.3,         0.7,          // YES YES NO  
+		   0.25,        0.75,         // YES NO  YES 
+		   0.23,        0.77,         // YES NO  NO  
+		   0.13,        0.87,         // NO  YES YES 
+		   0.09,        0.91,         // NO  YES NO  
+		   0.06,        0.94,         // NO  NO  YES 
+		   0.01,        0.99);        // NO  NO  NO  ;
+	numcases = 1;
+	title = "Physiological Effects";
+	whenchanged = 1509007101;
+	belief = (0.06040005, 0.9396);
+	visual V1 {
+		center = (1620, 390);
+		height = 20;
+		};
+	};
+
+node A8 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (YES, NO);
+	parents = (U, S, R, Z, A1, A5);
+	probs = 
+		// YES          NO            // U   S   R   Z   A1  A5  
+		  (0.94,        0.06,         // YES YES YES YES YES YES 
+		   0.83,        0.17,         // YES YES YES YES YES NO  
+		   0.9,         0.1,          // YES YES YES YES NO  YES 
+		   0.8,         0.2,          // YES YES YES YES NO  NO  
+		   0.85,        0.15,         // YES YES YES NO  YES YES 
+		   0.7,         0.3,          // YES YES YES NO  YES NO  
+		   0.78,        0.22,         // YES YES YES NO  NO  YES 
+		   0.67,        0.33,         // YES YES YES NO  NO  NO  
+		   0.75,        0.25,         // YES YES NO  YES YES YES 
+		   0.37,        0.63,         // YES YES NO  YES YES NO  
+		   0.7,         0.3,          // YES YES NO  YES NO  YES 
+		   0.32,        0.68,         // YES YES NO  YES NO  NO  
+		   0.67,        0.33,         // YES YES NO  NO  YES YES 
+		   0.3,         0.7,          // YES YES NO  NO  YES NO  
+		   0.65,        0.35,         // YES YES NO  NO  NO  YES 
+		   0.27,        0.73,         // YES YES NO  NO  NO  NO  
+		   0.73,        0.27,         // YES NO  YES YES YES YES 
+		   0.45,        0.55,         // YES NO  YES YES YES NO  
+		   0.7,         0.3,          // YES NO  YES YES NO  YES 
+		   0.43,        0.57,         // YES NO  YES YES NO  NO  
+		   0.71,        0.29,         // YES NO  YES NO  YES YES 
+		   0.4,         0.6,          // YES NO  YES NO  YES NO  
+		   0.65,        0.35,         // YES NO  YES NO  NO  YES 
+		   0.35,        0.65,         // YES NO  YES NO  NO  NO  
+		   0.48,        0.52,         // YES NO  NO  YES YES YES 
+		   0.18,        0.82,         // YES NO  NO  YES YES NO  
+		   0.48,        0.52,         // YES NO  NO  YES NO  YES 
+		   0.11,        0.89,         // YES NO  NO  YES NO  NO  
+		   0.41,        0.59,         // YES NO  NO  NO  YES YES 
+		   0.1,         0.9,          // YES NO  NO  NO  YES NO  
+		   0.37,        0.63,         // YES NO  NO  NO  NO  YES 
+		   0.03,        0.97,         // YES NO  NO  NO  NO  NO  
+		   0.88,        0.12,         // NO  YES YES YES YES YES 
+		   0.56,        0.44,         // NO  YES YES YES YES NO  
+		   0.77,        0.23,         // NO  YES YES YES NO  YES 
+		   0.45,        0.55,         // NO  YES YES YES NO  NO  
+		   0.72,        0.28,         // NO  YES YES NO  YES YES 
+		   0.42,        0.58,         // NO  YES YES NO  YES NO  
+		   0.68,        0.32,         // NO  YES YES NO  NO  YES 
+		   0.37,        0.63,         // NO  YES YES NO  NO  NO  
+		   0.5,         0.5,          // NO  YES NO  YES YES YES 
+		   0.2,         0.8,          // NO  YES NO  YES YES NO  
+		   0.44,        0.56,         // NO  YES NO  YES NO  YES 
+		   0.16,        0.84,         // NO  YES NO  YES NO  NO  
+		   0.46,        0.54,         // NO  YES NO  NO  YES YES 
+		   0.12,        0.88,         // NO  YES NO  NO  YES NO  
+		   0.37,        0.63,         // NO  YES NO  NO  NO  YES 
+		   0.08,        0.92,         // NO  YES NO  NO  NO  NO  
+		   0.67,        0.33,         // NO  NO  YES YES YES YES 
+		   0.43,        0.57,         // NO  NO  YES YES YES NO  
+		   0.63,        0.37,         // NO  NO  YES YES NO  YES 
+		   0.38,        0.62,         // NO  NO  YES YES NO  NO  
+		   0.56,        0.44,         // NO  NO  YES NO  YES YES 
+		   0.35,        0.65,         // NO  NO  YES NO  YES NO  
+		   0.52,        0.48,         // NO  NO  YES NO  NO  YES 
+		   0.27,        0.73,         // NO  NO  YES NO  NO  NO  
+		   0.33,        0.67,         // NO  NO  NO  YES YES YES 
+		   0.15,        0.85,         // NO  NO  NO  YES YES NO  
+		   0.29,        0.71,         // NO  NO  NO  YES NO  YES 
+		   0.07,        0.93,         // NO  NO  NO  YES NO  NO  
+		   0.26,        0.74,         // NO  NO  NO  NO  YES YES 
+		   0.05,        0.95,         // NO  NO  NO  NO  YES NO  
+		   0.22,        0.78,         // NO  NO  NO  NO  NO  YES 
+		   1e-4,        0.9999);      // NO  NO  NO  NO  NO  NO  ;
+	numcases = 
+		                 // U   S   R   Z   A1  A5  
+		  (1,            // YES YES YES YES YES YES 
+		   1,            // YES YES YES YES YES NO  
+		   1,            // YES YES YES YES NO  YES 
+		   1,            // YES YES YES YES NO  NO  
+		   1,            // YES YES YES NO  YES YES 
+		   1,            // YES YES YES NO  YES NO  
+		   1,            // YES YES YES NO  NO  YES 
+		   1,            // YES YES YES NO  NO  NO  
+		   1,            // YES YES NO  YES YES YES 
+		   1,            // YES YES NO  YES YES NO  
+		   1,            // YES YES NO  YES NO  YES 
+		   1,            // YES YES NO  YES NO  NO  
+		   1,            // YES YES NO  NO  YES YES 
+		   1,            // YES YES NO  NO  YES NO  
+		   1,            // YES YES NO  NO  NO  YES 
+		   1,            // YES YES NO  NO  NO  NO  
+		   0,            // YES NO  YES YES YES YES 
+		   0,            // YES NO  YES YES YES NO  
+		   0,            // YES NO  YES YES NO  YES 
+		   0,            // YES NO  YES YES NO  NO  
+		   0,            // YES NO  YES NO  YES YES 
+		   0,            // YES NO  YES NO  YES NO  
+		   0,            // YES NO  YES NO  NO  YES 
+		   0,            // YES NO  YES NO  NO  NO  
+		   0,            // YES NO  NO  YES YES YES 
+		   0,            // YES NO  NO  YES YES NO  
+		   0,            // YES NO  NO  YES NO  YES 
+		   0,            // YES NO  NO  YES NO  NO  
+		   0,            // YES NO  NO  NO  YES YES 
+		   0,            // YES NO  NO  NO  YES NO  
+		   0,            // YES NO  NO  NO  NO  YES 
+		   0,            // YES NO  NO  NO  NO  NO  
+		   0,            // NO  YES YES YES YES YES 
+		   0,            // NO  YES YES YES YES NO  
+		   0,            // NO  YES YES YES NO  YES 
+		   0,            // NO  YES YES YES NO  NO  
+		   0,            // NO  YES YES NO  YES YES 
+		   0,            // NO  YES YES NO  YES NO  
+		   0,            // NO  YES YES NO  NO  YES 
+		   0,            // NO  YES YES NO  NO  NO  
+		   0,            // NO  YES NO  YES YES YES 
+		   0,            // NO  YES NO  YES YES NO  
+		   0,            // NO  YES NO  YES NO  YES 
+		   0,            // NO  YES NO  YES NO  NO  
+		   0,            // NO  YES NO  NO  YES YES 
+		   0,            // NO  YES NO  NO  YES NO  
+		   0,            // NO  YES NO  NO  NO  YES 
+		   0,            // NO  YES NO  NO  NO  NO  
+		   0,            // NO  NO  YES YES YES YES 
+		   0,            // NO  NO  YES YES YES NO  
+		   0,            // NO  NO  YES YES NO  YES 
+		   0,            // NO  NO  YES YES NO  NO  
+		   0,            // NO  NO  YES NO  YES YES 
+		   0,            // NO  NO  YES NO  YES NO  
+		   0,            // NO  NO  YES NO  NO  YES 
+		   0,            // NO  NO  YES NO  NO  NO  
+		   0,            // NO  NO  NO  YES YES YES 
+		   0,            // NO  NO  NO  YES YES NO  
+		   0,            // NO  NO  NO  YES NO  YES 
+		   0,            // NO  NO  NO  YES NO  NO  
+		   0,            // NO  NO  NO  NO  YES YES 
+		   0,            // NO  NO  NO  NO  YES NO  
+		   0,            // NO  NO  NO  NO  NO  YES 
+		   0);           // NO  NO  NO  NO  NO  NO  ;
+	title = "Chance of Accident";
+	whenchanged = 1509059888;
+	belief = (0.2040123, 0.7959877);
+	visual V1 {
+		center = (990, 768);
+		height = 1;
+		};
+	};
+ElimOrder = (G, H, N, A3, A4, L, A7, A2, J, U, S, Z, A1, A5, A8, R, X, T, W, V, Y, A6, M, K);
+};
